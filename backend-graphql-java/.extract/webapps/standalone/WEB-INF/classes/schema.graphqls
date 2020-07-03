@@ -1,0 +1,38 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  allNotes: [Note]
+}
+
+type Mutation {
+  createUser(name: String!, authProvider: AuthData!): User
+  updateNote(title: String!, content: String!,tags:[String]): Note
+  signinUser(auth: AuthData): SigninPayload
+}
+
+type SigninPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  password: String
+}
+    
+input AuthData {
+  email: String!
+  password: String!
+}
+type Note {
+  id: ID!
+  title: String!
+  content: String!
+  tags: [String]
+  ownedBy: User
+}
